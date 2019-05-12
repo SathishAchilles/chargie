@@ -1,0 +1,61 @@
+<div class="modal inmodal" id="new-charging-station" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <i class="fa fa-plug modal-icon"></i>
+        <h4 class="modal-title">New Station</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for @charging_station, url: charging_stations_create_url, html: {class: 'form-horizontal'} do |f| %>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                  <div class="form-group"><label class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10"><%= f.text_field :name, class: 'form-control' %></div>
+                  </div>
+                  <div class="hr-line-dashed"></div>
+                  <div class="form-group"><label class="col-sm-2 control-label">Capacity</label>
+                    <div class="col-sm-10"><%= f.text_field :capacity, class: 'form-control' %></div>
+                  </div>
+                  <div class="hr-line-dashed"></div>
+                  <div class="form-group"><label class="col-sm-2 control-label">Unit</label>
+                    <div class="col-sm-10"><%= f.select :unit, options_for_select(["Kw", "Mw"]), :class => 'form-control m-b' %></div>
+                  </div>
+                  <div class="hr-line-dashed"></div>
+                  <div class="form-group"><label class="col-sm-2 control-label">Type</label>
+                    <div class="col-sm-10"><%= f.select :charger_type, options_for_select(["DC", "AC"]), :class => 'form-control m-b' %></div>
+                  </div>
+                  <div class="hr-line-dashed"></div>
+                  <div class="form-group"><label class="col-sm-2 control-label">Address</label>
+                    <div class="col-sm-10"><%= f.text_field :address, class: 'form-control' %></div>
+                  </div>
+                  <div class="hr-line-dashed"></div>
+                  <div class="form-group"><label class="col-sm-2 control-label">Latitude</label>
+
+                    <div class="col-sm-10"><%= f.text_field :latitude, class: 'form-control' %></div>
+                  </div>
+                  <div class="hr-line-dashed"></div>
+                  <div class="form-group"><label class="col-sm-2 control-label">Longitude</label>
+
+                    <div class="col-sm-10"><%= f.text_field :longitude, class: 'form-control' %></div>
+                  </div>
+                  <div class="hr-line-dashed"></div>
+                  <div class="form-group"><label class="col-lg-2 control-label">Status</label>
+                    <div class="col-lg-10"><%= f.check_box :status, class: 'form-control' %></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          <div class="modal-footer">
+            <%= f.submit 'Submit', class: 'btn btn-primary' %>
+            <%= link_to 'Close', dashboard_path, class: 'btn btn-white' %>
+          </div>
+        <% end %>
+        </div>
+  </div>
+</div>

@@ -1,0 +1,108 @@
+<div class="wrapper wrapper-content animated fadeIn">
+
+  <div class="p-w-md m-t-sm">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title">
+            <span class="label label-success pull-right">Monthly</span>
+            <h5>Consumption</h5>
+          </div>
+          <div class="ibox-content">
+            <h1 class="no-margins"><%= @consumption %> kw</h1>
+            <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title">
+            <span class="label label-primary pull-right">Monthly</span>
+            <h5>Revenue</h5>
+          </div>
+          <div class="ibox-content">
+            <h1 class="no-margins"><%=@price %></h1>
+            <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title">
+            <span class="label label-info pull-right"><i class="fa fa-play fa-rotate-270"></i>  Online</span>
+            <h5>Stations</h5>
+          </div>
+          <div class="ibox-content">
+            <h1 class="no-margins"><%= @online_stations %></h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title">
+            <span class="label label-danger pull-right"><i class="fa fa-play fa-rotate-90"></i>  Offline</span>
+            <h5>Stations</h5>
+          </div>
+          <div class="ibox-content">
+            <h1 class="no-margins"><%= @offline_stations %></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+          <div class="ibox-title">
+            <h5>Consumption Graph</h5>
+          </div>
+          <div class="ibox-content">
+            <div id="morris-one-line-chart"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox">
+
+          <div class="ibox-content">
+
+            <div class="row">
+              <div class="col-sm-2">
+                <div class="text-center">
+                  <%= link_to 'Add station', charging_stations_new_path, {class: 'btn btn-primary'} %>
+                </div>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <%= render partial: 'data_tables', charging_stations: @charging_stations %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :javascript do %>
+
+  <script type="text/javascript">
+      $(function () {
+
+          Morris.Line({
+              element: 'morris-one-line-chart',
+              data: <%= @graph_data.to_json.html_safe %>,
+              xkey: 'date',
+              ykeys: ['consumption'],
+              resize: true,
+              lineWidth: 4,
+              labels: ['consumption'],
+              lineColors: ['#1ab394'],
+              pointSize: 5,
+          });
+      });
+  </script>
+
+<% end %>
